@@ -1,0 +1,53 @@
+{
+    "db":
+            {
+                "mysql":
+                        {
+                            "defaulte":
+                                    {
+                                        "schema": "defaulto",
+                                        "minimo_conexao": "2",
+                                        "connection_params":
+                                                {
+                                                    "database": "financeiroavic02",
+                                                    "host": "mysql06-farm62.kinghost.net",
+                                                    "user": "financei02_add2",
+                                                    "password": "avicres01"
+                                                }
+                                    },
+                            "cep":
+                                    {
+                                        "schema": "cep",
+                                        "minimo_conexao": "1",
+                                        "connection_params":
+                                                {
+                                                    "database": "financeiroavic02",
+                                                    "host": "mysql06-farm62.kinghost.net",
+                                                    "user": "financei02_add2",
+                                                    "password": "avicres01"
+                                                }
+                                    },
+                            "Endereco":
+                                    {
+                                        "schema": "Endereco",
+                                        "minimo_conexao": "2",
+                                        "connection_params":
+                                                {
+                                                    "database": "cep",
+                                                    "host": "mysql06-farm62.kinghost.net",
+                                                    "user": "financeiro_add2",
+                                                    "password": "avicres01"
+                                                }
+                                    }
+                        }
+            },
+    "view_engine":
+            {
+                "dir":
+                        {
+                            "views": "./projeto/views/",
+                            "js": "../../training/projeto/views/fab/assets/js/",
+                            "css": "../../training/projeto/views/fab/assets/css/"
+                        }
+            }
+}
