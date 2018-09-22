@@ -14,11 +14,10 @@ class MysqlCRUD implements ICRUD {
     }
 
     public function delete($query) {
-        $mysqlConnection = $this->connectionPool->getConnection();
-        $link = $mysqlConnection->getConnection();
-        $result = mysqli_query($link, $query);
+        $mysqlConnection = $this->connectionPool->getConnection();        
+        $result = mysqli_query($mysqlConnection, $query);
         if (!$result) {
-            throw new ConnectionException("Não foi possível completar a solicitação. Foi apresentado o seguinte erro: " . mysqli_error($link));
+            throw new ConnectionException("Não foi possível completar a solicitação. Foi apresentado o seguinte erro: " . mysqli_error($mysqlConnection));
         } else {
             $this->connectionPool->closeConnection($mysqlConnection);
             return $result;
@@ -27,11 +26,10 @@ class MysqlCRUD implements ICRUD {
 
     public function get($query) {
         $mysqlConnection = $this->connectionPool->getConnection();
-        $link = $mysqlConnection->getConnection();
-        mysqli_set_charset($link, 'utf8');
-        $result = mysqli_query($link, $query);
+        mysqli_set_charset($mysqlConnection, 'utf8');
+        $result = mysqli_query($mysqlConnection, $query);
         if (!$result) {
-            throw new ConnectionException("Não foi possível completar a solicitação. Foi apresentado o seguinte erro: " . mysqli_error($link));
+            throw new ConnectionException("Não foi possível completar a solicitação. Foi apresentado o seguinte erro: " . mysqli_error($mysqlConnection));
         } else {
             $array = array();
             while ($rs = mysqli_fetch_assoc($result)) {
@@ -44,24 +42,23 @@ class MysqlCRUD implements ICRUD {
 
     public function insert($query) {
         $mysqlConnection = $this->connectionPool->getConnection();
-        $link = $mysqlConnection->getConnection();
-        mysqli_set_charset($link, 'utf8');
-        $result = mysqli_query($link, $query);
+        mysqli_set_charset($mysqlConnection, 'utf8');
+        $result = mysqli_query($mysqlConnection, $query);
         if (!$result) {
-            throw new ConnectionException("Não foi possível completar a solicitação. Foi apresentado o seguinte erro: " . mysqli_error($link));
+            throw new ConnectionException("Não foi possível completar a solicitação. Foi apresentado o seguinte erro: " . mysqli_error($mysqlConnection));
         } else {
             $this->connectionPool->closeConnection($mysqlConnection);
-            return mysqli_insert_id($link);
+            return mysqli_insert_id($mysqlConnection);
         }
     }
 
     public function update($query) {
         $mysqlConnection = $this->connectionPool->getConnection();
-        $link = $mysqlConnection->getConnection();
-        mysqli_set_charset($link, 'utf8');
-        $result = mysqli_query($link, $query);
+
+        mysqli_set_charset($mysqlConnection, 'utf8');
+        $result = mysqli_query($mysqlConnection, $query);
         if (!$result) {
-            throw new ConnectionException("Não foi possível completar a solicitação. Foi apresentado o seguinte erro: " . mysqli_error($link));
+            throw new ConnectionException("Não foi possível completar a solicitação. Foi apresentado o seguinte erro: " . mysqli_error($mysqlConnection));
         } else {
             $this->connectionPool->closeConnection($mysqlConnection);
             return $result;

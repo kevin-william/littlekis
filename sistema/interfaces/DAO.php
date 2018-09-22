@@ -3,15 +3,15 @@
 namespace kis\sistema\interfaces;
 
 use kis\sistema\helpers\Database_helper;
+use kis\sistema\database\interfaces\ICRUD;
 
 abstract class DAO {
 
-    protected $schema = "default";
+    
     protected $ICRUD;
 
-    public function __construct() {
-        $this->definirSchemaDaSessao();
-        $this->setICRUD();
+    public function __construct(ICRUD $iCRUD) {
+        $this->ICRUD = $iCRUD;
     }
     
     private function setICRUD(){

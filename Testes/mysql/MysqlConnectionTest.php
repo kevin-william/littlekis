@@ -3,29 +3,31 @@
 namespace kis\projeto\Testes;
 
 use kis\sistema\database\models\mysql\MysqlConnectionParams;
-use kis\sistema\database\models\mysql\MysqlConnection;
+use kis\sistema\database\models\mysql\MysqlConnectionFactory;
+use kis\sistema\interfaces\ITeste;
 
-class MysqlConnectionTest {
+class MysqlConnectionTest implements ITeste {
 
-    private $connectionParams;
-    private $mysqlConnection;
-
-    private function ConnectionParamsBuilder() {
-        $this->connectionParams = new MysqlConnectionParams();
-        return $this->connectionParams
-                        ->setUsuario("rot")
+    private function connectionParamsBuilder() {
+        $connectionParams = new MysqlConnectionParams();
+        return $connectionParams
+                        ->setUsuario("root")
                         ->setSenha("root")
                         ->setDatabase("littlekis")
                         ->setHost("127.0.0.1");
     }
 
-    private function setMysqlConnection() {
-        $this->mysqlConnection = new MysqlConnection($this->ConnectionParamsBuilder());
+    private function mysqlConnectionFactoryGetInstance() {
+        return new MysqlConnectionFactory();
     }
 
-    public function getMysqlConnection() {
-        $this->setMysqlConnection();
-        return $this->mysqlConnection;
+    private function getMysqlConnection() {
+        $mcf = $this->mysqlConnectionFactoryGetInstance();
+        return $mcf->getConnection($this->ConnectionParamsBuilder());
+    }
+
+    public function executarTestes() {
+        $this->getMysqlConnection();
     }
 
 }

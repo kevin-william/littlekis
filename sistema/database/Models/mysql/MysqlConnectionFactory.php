@@ -23,9 +23,7 @@ class MysqlConnectionFactory implements IConnection {
 
         return $connection;
     }
-
-    public function closeConnection(mysqli $conexao) {
-        mysqli_close($conexao);
-    }
+    
+    
 
 }

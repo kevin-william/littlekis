@@ -33,11 +33,19 @@ class MysqlConnectionPoolTest implements ITeste{
         }
 
         echo "Nº de conexões criadas: " . count($cpool->pool) . "<br>";
+    }   
+    
+    public function testar($var) {
+        $var();
     }
 
     public function executarTestes() {
         echo 'Testando Pool de Conexões: <br>';
         $this->TestarPool();
+        $var = function () {
+        echo 'OLÁ';
+        };
+        $this->testar($var);
     }
 
 }

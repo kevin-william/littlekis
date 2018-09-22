@@ -7,7 +7,7 @@ use mysqli;
 
 class MysqlConnectionPool {
 
-    public $pool = array();
+    private $pool = array();
     private $mysqlConnectionFactory;
     private $minConnections;
     public $freeConnections;
@@ -19,9 +19,9 @@ class MysqlConnectionPool {
     }
 
     private function CriarMinimoDeConexoes() {
-        while ($this->minConnections > count($this->pool)) {            
+        while ($this->minConnections > count($this->pool)) {
             $mysqlConnection = $this->getConnection();
-            array_push($this->pool, $mysqlConnection);            
+            array_push($this->pool, $mysqlConnection);
         }
         $this->freeConnections = $this->minConnections;
     }
